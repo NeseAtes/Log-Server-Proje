@@ -1,0 +1,133 @@
+<div class="col-lg-12">
+  <div class="box">   
+   <div class="box-header">
+    <h3 class="box-title">Log Filter</h3>    
+  </div>
+  <div class="panel panel-default top-panel-tabs">
+    <div class="panel-body">
+      <div class="row">
+       <div class="col-md-4">
+        <div class="input-group">
+          <label>App Name:</label>
+          <select ng-model="filters.app_name" class="form-control" id="name">
+            <option selected>Choose...</option>
+            <option ng-repeat="log in logs | unique: 'app_name'">{{log.app_name}}</option>
+          </select>                           
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <label>Date:</label>
+          <input type="text" ng-model="filters.date" class="form-control" id ="date" name="date" aria-describedby="Date" ng-bing="log.date" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <label>Log Level:</label>
+          <select ng-model="filters.log_level" class="form-control" id="level" name="loglevel">
+            <option selected>Choose...</option>
+            <option ng-repeat="log in logs | unique: 'log_level'">{{log.log_level}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br />
+      <div class="col-md-3 text-left">
+        <a class="btn btn-primary" ng-click="getFilteredData();">Search</a>
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  table{ 
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  tbody{
+    display: block;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px;
+  }
+  tr{
+    width: 100%;
+    display: block;
+  }
+  th{
+    padding: 5px;
+    text-align: left;
+    width: 200px;
+  }
+  td{
+    width: 200px;
+    text-align: left;"
+  }
+</style>
+
+<div class="box-header">
+  <h3 class="box-title">Log List</h3>    
+</div>
+<!-- /.box-header -->
+  <div class="row">
+    <div class="col-md-12">
+    <div class="box-body">
+      <input style="float: right; margin: 0px 5px;" type="text" ng-model="elastic" ng-change="yolla()">
+      <label style="float: right;">Search</label>
+      <br><br>
+      <div>
+      <table class="table table-bordered table-responsive">
+        <thead>
+          <tr>
+            <th>Log Id</th>
+            <th>Application Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Log Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="log in users.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+            <td style="width: 200px; text-align: left;">
+              {{ log._id }}
+            </td>             
+            <td style="width: 200px; text-align: left;">
+              {{ log.app_name }}
+            </td>              
+            <td style="width: 200px; text-align: left;">
+              {{ log.date }}
+            </td> 
+            <td style="width: 200px; text-align: left;" ng-click="show=!show" style="overflow: hidden;">
+              <p ng-if="show"> {{ log.description }} </p>
+              <p ng-if="!show" ng-bind="log.description | limitTo:10"></p>
+              <p ng-if="log.description.length>15 && !show">...</p>
+            </td>             
+            <td style="width: 200px; text-align: left; ">
+              {{ log.log_level }}
+            </td>                
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="col-md-12" style="background-color: white">
+    <div uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class=" pagination-md pagination" previous-text="&lsaquo;" max-size="6" boundary-link-numbers="true" next-text="&rsaquo;" items-per-page="itemsPerPage"></div>
+    <pre>The selected page no: {{currentPage}}</pre>
+  </div>
+  
+ </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $('#date').datepicker({
+      autoclose: true,
+      format: 'yyyy.mm.dd',
+      weekStart: 1,
+    });
+  });
+</script>

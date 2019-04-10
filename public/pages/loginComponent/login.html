@@ -1,0 +1,49 @@
+
+<div class="container" style="background-color: #fff; height:100vh;">
+  <br><br>
+  <div style="" class="row" >
+    <form style="margin-left: 20%;
+      width:30%;
+      position: absolute;
+      top: 40%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);" name="form">
+      <div class="col-lg-6" ng-show="!is_register">
+        <h2>SIGN IN </h2><br>
+        <div class="form-group">
+          <label>username</label>
+          <input type="text" class="form-control" ng-model="input_username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label>password</label>
+          <input type="password" autocomplete="off" class="form-control" ng-model="input_password" placeholder="Password">
+        </div>
+        <button type="submit" ng-model="btnsign_in" ng-show="!is_register" ng-click="signin()"class="btn btn-primary">Sign in</button>
+        <button ng-show="!is_register" class="btn btn-link" ng-click="dene()"> Register </button> 
+      </div>  
+
+      <div class="col-lg-6" ng-show="is_register">
+        <h2>REGISTER </h2><br>
+        <div class="form-group" ng-class="{ 'has-error' : form.k_username.$invalid && !form.k_username.$pristine }">
+          <label>username</label>
+          <input type="text" class="form-control" ng-model="k_username" id="username" name="k_username" placeholder="Enter username" ng-minlength="3" ng-maxlength="30">
+          <p ng-show="form.k_username.$error.minlength" class="help-block">*Kullanıcı adı çok kısa.</p>
+          <p ng-show="form.k_username.$error.maxlength" class="help-block">*Kullanıcı adı çok uzun.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : form.k_password.$invalid && !form.k_password.$pristine }">
+          <label>password</label>
+          <input type="password" autocomplete="off" class="form-control" id="password" name="k_password" ng-model="k_password" placeholder="Password" ng-minlength="8">
+          <p ng-show="form.k_password.$error.minlength" class="help-block">*En az 8 karakter</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : form.k_password2.$invalid && !form.k_password2.$pristine }">
+          <label>password again</label>
+          <input type="password" autocomplete="off" class="form-control" id="password2" name="k_password2" ng-model="k_password2"  placeholder="Password Again" ng-minlength="8">
+          <p ng-show="form.k_password2.$error.minlength" class="help-block">*En az 8 karakter</p>
+        </div>
+        <button type="submit" ng-model="btnregister_in" ng-show="is_register" ng-click="register()" class="btn btn-primary">Register</button>
+        <button ng-show="is_register" class="btn btn-link" ng-click="dene()">Sign in</button>
+        <p class="help-block">*Tüm alanlar zorunludur.</p>
+      </div>
+    </form>
+  </div>
+</div>

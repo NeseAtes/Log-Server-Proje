@@ -1,0 +1,44 @@
+<style type="text/css">
+  body{
+    background-color: #ffffff;
+  }
+  li{
+    list-style-type: none;
+  }
+  i{
+    font-size: 15px;
+    padding-right: 1em;
+  }
+  .red{
+    color: #ff0000;
+  }
+  .green{
+    color: #00e64d;
+  }
+  .yellow{
+    color: #ffff00;
+  }
+</style>
+
+  <div style="background-color: black" class="row">
+    <div class="col-lg-12">
+      <h1 style="text-align: center; color: white">LOGS</h1>
+      <!--button style="float: right; margin: 0px 5px">Filtrele</button-->
+      
+      <input style="float: right; margin: 0px 5px;" type="text" ng-model="test">   
+      <label style="float: right; color: white;">Filtrele</label>
+    </div>
+  </div>
+    <!--marquee scrollamount="10" height="50%" width="100%" direction="down"></marquee-->
+  <div class="row">
+    <div class="col-lg-12">
+      <ul>
+        <li class="{{opt.class}}" ng-repeat=" opt in items|filter:{log_level: test} |reverse">
+          <i>{{opt.date}} </i> 
+          <i>{{opt.app_name}} </i> 
+          <i>{{opt.description}} </i>
+          <i>{{opt.log_level}} </i> 
+      </li>
+    </ul>  
+    </div>
+  </div>

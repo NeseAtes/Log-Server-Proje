@@ -1,0 +1,36 @@
+<div class="col-xs-12">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Application List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table datatable="ng" dt-options="dtOptions" class="table table-bordered table-hover table-responsive">
+        <thead>
+          <tr>
+            <th>Application Id</th>
+            <th>Application IP</th>
+            <th>Hostname</th>
+            <th>Version</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="app in apps">
+              <td>
+                {{ app._id }}
+              </td>             
+               <td>
+                {{ app.app_ip }}
+              </td>              
+              <td>
+                {{ app.hostname }}
+              </td>              
+              <td>
+                {{ app.version }}
+              </td>               
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
